@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     // reminderForm.addCreateReminderForm()
     // reminderForm.listenEditDelete()
     // reminderAdapter.getReminders()
-    listForm.addCreateListForm()
-    listForm.listenEditDelete()
+    // listForm.addCreateListForm()
+    // listForm.listenEditDelete()
     listAdapter.getLists()
 })
 
