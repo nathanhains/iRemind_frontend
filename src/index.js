@@ -65,26 +65,26 @@ function postFetch(name, description, date, time, list_id){
     const bodyData = {name, description, date, time, list_id}
 
     if(editMode){
-        fetch(endPoint+`/${editMode.dataset.id}`, {
-            method: "PATCH",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(bodyData)
-        })
-        .then(response => response.json())
-        .then(reminder => {
-            if(!reminder.status){
-                document.querySelector('#create-reminder-button').value = "CreateStore"
-                document.querySelector('form').reset()
-                editMode.children[0].innerText = reminder.name
-                editMode.children[1].innerText = reminder.description
-                editMode.children[2].innerText = reminder.date
-                editMode.children[3].innerText = reminder.time
-                editMode = false
-            }else{
-                alert(reminder.errors)
-            }
-        })
-        .catch(err => console.log(err))
+        // fetch(endPoint+`/${editMode.dataset.id}`, {
+        //     method: "PATCH",
+        //     headers: {"Content-Type": "application/json"},
+        //     body: JSON.stringify(bodyData)
+        // })
+        // .then(response => response.json())
+        // .then(reminder => {
+        //     if(!reminder.status){
+        //         document.querySelector('#create-reminder-button').value = "CreateStore"
+        //         document.querySelector('form').reset()
+        //         editMode.children[0].innerText = reminder.name
+        //         editMode.children[1].innerText = reminder.description
+        //         editMode.children[2].innerText = reminder.date
+        //         editMode.children[3].innerText = reminder.time
+        //         editMode = false
+        //     }else{
+        //         alert(reminder.errors)
+        //     }
+        // })
+        // .catch(err => console.log(err))
     }else {
     // you only need to establish key names once if they are the same
     fetch(endPoint, {
