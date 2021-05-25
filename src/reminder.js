@@ -1,4 +1,7 @@
 class Reminder {
+
+    static all = []
+    
     constructor(reminder, reminderAttributes) {
         this.id = reminder.id
         this.name = reminderAttributes.name
@@ -25,5 +28,3 @@ class Reminder {
         `
     }
 }
-
-Reminder.all = []
