@@ -17,7 +17,7 @@ class ReminderListAdapter{
         })
     }
 
-    addReminder(){
+    addReminder(bodyData){
         fetch(this.baseReminderURL, {
             method: "POST",
             // json
@@ -41,7 +41,7 @@ class ReminderListAdapter{
         .catch(err=> console.log(err))
     }
 
-    editReminder(editMode){
+    editReminder(editMode, bodyData){
         fetch(this.baseReminderURL+`/${editMode.dataset.id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
@@ -59,6 +59,21 @@ class ReminderListAdapter{
                 editMode = false
             }else{
                 alert(reminder.errors)
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
+    deleteReminder(div){
+        fetch(this.baseReminderURL+`/${div.dataset.id}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Successfully deleted"){
+                div.remove()
+            }else {
+                alert(data.message)
             }
         })
         .catch(err => console.log(err))

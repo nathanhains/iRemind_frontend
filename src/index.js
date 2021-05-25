@@ -1,11 +1,12 @@
-const endPoint = "http://localhost:3000/api/v1/reminders"
+// const endPoint = "http://localhost:3000/api/v1/reminders"
 let editMode = false
+const reminderListAdapter = new ReminderListAdapter("http://localhost:3000")
 
 // event listener, fetch, modify dom
 
 document.addEventListener('DOMContentLoaded', () =>{
     addCreateReminderForm()
-    getReminders()
+    reminderListAdapter.getReminders()
     listenEditDelete()
 })
 
@@ -65,6 +66,7 @@ function postFetch(name, description, date, time, list_id){
     const bodyData = {name, description, date, time, list_id}
 
     if(editMode){
+        reminderListAdapter.editReminder(editMode, bodyData)
         // fetch(endPoint+`/${editMode.dataset.id}`, {
         //     method: "PATCH",
         //     headers: {"Content-Type": "application/json"},
@@ -86,6 +88,7 @@ function postFetch(name, description, date, time, list_id){
         // })
         // .catch(err => console.log(err))
     }else {
+        reminderListAdapter.addReminder(bodyData)
     // you only need to establish key names once if they are the same
     // fetch(endPoint, {
     //     method: "POST",
@@ -118,18 +121,19 @@ function listenEditDelete(){
 function handleEditDelete(e){
     const div = e.target.parentElement
     if (e.target.dataset.action === "delete"){
-        fetch(endPoint+`/${div.dataset.id}`, {
-            method: "DELETE"
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message === "Successfully deleted"){
-                div.remove()
-            }else {
-                alert(data.message)
-            }
-        })
-        .catch(err => console.log(err))
+        reminderListAdapter.deleteReminder(div)
+        // fetch(endPoint+`/${div.dataset.id}`, {
+        //     method: "DELETE"
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     if (data.message === "Successfully deleted"){
+        //         div.remove()
+        //     }else {
+        //         alert(data.message)
+        //     }
+        // })
+        // .catch(err => console.log(err))
     }else if(e.target.dataset.action === "edit") {
         editMode = div
 
