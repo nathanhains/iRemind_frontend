@@ -1,11 +1,12 @@
-let editMode = false
-const reminderListAdapter = new ReminderListAdapter("http://localhost:3000")
-const reminderForm = new ReminderForm
+// let editMode = false
+// const reminderAdapter = new ReminderAdapter("http://localhost:3000")
+// const reminderForm = new ReminderForm
 // event listener, fetch, modify dom
 
 document.addEventListener('DOMContentLoaded', () =>{
-    reminderForm.addCreateReminderForm()
-    reminderForm.listenEditDelete()
-    reminderListAdapter.getReminders()
+    // reminderForm.addCreateReminderForm()
+    // reminderForm.listenEditDelete()
+    // reminderAdapter.getReminders()
+
 })
 

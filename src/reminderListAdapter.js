@@ -1,4 +1,4 @@
-class ReminderListAdapter{
+class ReminderAdapter{
     constructor(baseURL){
         this.baseReminderURL = `${baseURL}/api/v1/reminders`
     }
