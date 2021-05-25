@@ -40,7 +40,7 @@ class ListForm{
     handleEditDelete = (e) => {
         const div = e.target.parentElement
         if (e.target.dataset.action === "delete"){
-            reminderListAdapter.deleteReminder(div)
+            listAdapter.deleteList(div)
         }else if(e.target.dataset.action === "edit") {
             editMode = div
     

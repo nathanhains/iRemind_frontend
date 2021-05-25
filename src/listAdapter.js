@@ -40,7 +40,7 @@ class ListAdapter{
         })
         .catch(err=> console.log(err))
     }
-    
+
     editList(editMode, bodyData){
         fetch(this.baseListURL+`/${editMode.dataset.id}`, {
             method: "PATCH",
@@ -57,6 +57,21 @@ class ListAdapter{
                 editMode = false
             }else{
                 alert(list.errors)
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
+    deleteList(div){
+        fetch(this.baseListURL+`/${div.dataset.id}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Successfully deleted"){
+                div.remove()
+            }else {
+                alert(data.message)
             }
         })
         .catch(err => console.log(err))
