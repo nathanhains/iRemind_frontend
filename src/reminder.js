@@ -15,7 +15,7 @@ class Reminder {
             <div data-id=${this.id}>
                 <h1>reminder: ${this.name}</h1>
                 <h3>list: ${this.list.name}</h3>
-                <button data-action='delete' data-id=${this.id}>X</button>
+                <button data-action='edit' data-id=${this.id}>Edit</button> <button data-action='delete' data-id=${this.id}>X</button>
             </div>
             <br><br>
         `

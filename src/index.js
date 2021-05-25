@@ -1,15 +1,38 @@
 const endPoint = "http://localhost:3000/api/v1/reminders"
+const editMode = false
 
 // event listener, fetch, modify dom
 
 document.addEventListener('DOMContentLoaded', () =>{
+    addCreateReminderForm()
     getReminders()
-    const createReminderForm = document.querySelector("#create-reminder-form")
-    // when an event happens
-    createReminderForm.addEventListener("submit", (e) => createFormHandler(e))
-
-    listenDelete()
+    listenEditDelete()
 })
+
+function addCreateReminderForm(){
+    const formContainer = document.querySelector(".form-container")
+    const form = document.createElement('form')
+    form.innerHTML = `
+            <h3>Create a new reminder</h3>
+
+            <input id="input-name" type="text" name="name" placeholder="Name">
+            <br><br>
+            <textarea id="input-description" type="text" name="description" placeholder="Description"></textarea>
+            <br><br>
+            <input id="input-date" type="text" name="date" placeholder="Date">
+            <br><br>
+            <input id="input-time" type="text" name="time" placeholder="Time">
+            <br><br>
+            <select id="lists" name="lists">
+                <option value="1">Forgetful List</option>
+            </select>
+            <br><br>
+
+            <input id="create-button" type="submit" name="submit" value="Create new reminder" class="submit">
+    `
+    formContainer.append(form)
+    form.addEventListener("submit", (e) => createFormHandler(e))
+}
 
 function getReminders(){
     //fetch
@@ -59,13 +82,13 @@ function postFetch(name, description, date, time, list_id){
     // .catch(err=> console.log(err))
 }
 
-function listenDelete(){
-    document.querySelector("#reminder-container").addEventListener("click", handleDelete)
+function listenEditDelete(){
+    document.querySelector("#reminder-container").addEventListener("click", handleEditDelete)
 }
 
-function handleDelete(e){
+function handleEditDelete(e){
+    const div = e.target.parentElement
     if (e.target.dataset.action === "delete"){
-        const div = e.target.parentElement
         fetch(endPoint+`/${div.dataset.id}`, {
             method: "DELETE"
         })
@@ -78,6 +101,9 @@ function handleDelete(e){
             }
         })
         .catch(err => console.log(err))
+    }else if(e.target.dataset.action === "edit") {
+        editMode = div
+
     }
 }
 
