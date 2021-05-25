@@ -9,18 +9,6 @@ document.addEventListener('DOMContentLoaded', () =>{
     createReminderForm.addEventListener("submit", (e) => createFormHandler(e))
 })
 
-function render(reminder){
-    const reminderMarkup =`
-        <div data-id=${reminder.id}>
-            <h1>reminder: ${reminder.attributes.name}</h1>
-            <h3>list: ${reminder.attributes.list.name}</h3>
-            <button data-id=${reminder.id}>edit</button>
-        </div>
-        <br><br>
-    `
-    document.querySelector('#reminder-container').innerHTML += reminderMarkup
-}
-
 function getReminders(){
     //fetch
     fetch(endPoint)
@@ -29,7 +17,9 @@ function getReminders(){
     .then(reminders => {
         // backend serializer sets data into data key 
         reminders.data.forEach(reminder => {
-            render(reminder)
+            let newReminder = new Reminder(reminder, reminder.attributes)
+            // calling the instance method
+            document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
         })
 
     })
@@ -60,7 +50,9 @@ function postFetch(name, description, date, time, list_id){
     .then(reminder => {
         const reminderData = reminder.data
         //render json response
-        render(reminderData)
+        let newReminder = new Reminder(reminderData, reminderData.attributes)
+        // calling the instance method
+        document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
     })
     // .catch(err=> console.log(err))
 }
