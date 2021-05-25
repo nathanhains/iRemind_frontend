@@ -1,5 +1,5 @@
 const endPoint = "http://localhost:3000/api/v1/reminders"
-const editMode = false
+let editMode = false
 
 // event listener, fetch, modify dom
 
@@ -28,7 +28,7 @@ function addCreateReminderForm(){
             </select>
             <br><br>
 
-            <input id="create-button" type="submit" name="submit" value="Create new reminder" class="submit">
+            <input id="create-reminder-button" type="submit" name="submit" value="Create new reminder" class="submit">
     `
     formContainer.append(form)
     form.addEventListener("submit", (e) => createFormHandler(e))
@@ -62,8 +62,26 @@ function createFormHandler(e){
 }
 
 function postFetch(name, description, date, time, list_id){
-    // you only need to establish key names once if they are the same
     const bodyData = {name, description, date, time, list_id}
+
+    if(editMode){
+        fetch(endPoint+`/${editMode.dataset.id}`, {
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(bodyData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('#create-reminder-button').value = "CreateStore"
+            editMode.children[0].innerText = data.name
+            editMode.children[1].innerText = data.description
+            editMode.children[2].innerText = data.date
+            editMode.children[3].innerText = data.time
+            editMode = false
+        })
+        .catch(err => console.log(err))
+    }else {
+    // you only need to establish key names once if they are the same
     fetch(endPoint, {
         method: "POST",
         // json
@@ -80,6 +98,7 @@ function postFetch(name, description, date, time, list_id){
         document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
     })
     // .catch(err=> console.log(err))
+    }
 }
 
 function listenEditDelete(){
@@ -103,6 +122,12 @@ function handleEditDelete(e){
         .catch(err => console.log(err))
     }else if(e.target.dataset.action === "edit") {
         editMode = div
+
+        document.querySelector('#create-reminder-button').value = "Update"
+        document.querySelector('#input-name').value = div.children[0].innerText
+        document.querySelector('#input-description').value = div.children[1].innerText
+        document.querySelector('#input-date').value = div.children[2].innerText
+        document.querySelector('#input-time').value = div.children[3].innerText
 
     }
 }
