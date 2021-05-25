@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     const createReminderForm = document.querySelector("#create-reminder-form")
     // when an event happens
     createReminderForm.addEventListener("submit", (e) => createFormHandler(e))
+
+    listenDelete()
 })
 
 function getReminders(){
@@ -55,5 +57,27 @@ function postFetch(name, description, date, time, list_id){
         document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
     })
     // .catch(err=> console.log(err))
+}
+
+function listenDelete(){
+    document.querySelector("#reminder-container").addEventListener("click", handleDelete)
+}
+
+function handleDelete(e){
+    if (e.target.dataset.action === "delete"){
+        const div = e.target.parentElement
+        fetch(endPoint+`/${div.dataset.id}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Successfully deleted"){
+                div.remove()
+            }else {
+                alert(data.message)
+            }
+        })
+        .catch(err => console.log(err))
+    }
 }
 

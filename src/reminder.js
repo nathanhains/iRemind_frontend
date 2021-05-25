@@ -10,13 +10,12 @@ class Reminder {
 
     // do not need function inside of classes
     renderReminder(){
-        debugger
         // we set attributes keyword in our constructor
         return `
             <div data-id=${this.id}>
                 <h1>reminder: ${this.name}</h1>
                 <h3>list: ${this.list.name}</h3>
-                <button data-id=${this.id}>edit</button>
+                <button data-action='delete' data-id=${this.id}>X</button>
             </div>
             <br><br>
         `
