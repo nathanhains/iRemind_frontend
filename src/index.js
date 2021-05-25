@@ -53,12 +53,12 @@ function getReminders(){
 function createFormHandler(e){
     e.preventDefault()
     //e.target to get form
-    const nameInput = document.querySelector("#input-name").value
-    const descriptionInput = document.querySelector("#input-description").value
-    const dateInput = document.querySelector("#input-date").value
-    const timeInput = document.querySelector("#input-time").value
-    const listInput = parseInt(document.querySelector("#lists").value)
-    postFetch(nameInput, descriptionInput, dateInput, timeInput, listInput)
+        const nameInput = document.querySelector("#input-name").value
+        const descriptionInput = document.querySelector("#input-description").value
+        const dateInput = document.querySelector("#input-date").value
+        const timeInput = document.querySelector("#input-time").value
+        const listInput = parseInt(document.querySelector("#lists").value)
+        postFetch(nameInput, descriptionInput, dateInput, timeInput, listInput)
 }
 
 function postFetch(name, description, date, time, list_id){
@@ -71,13 +71,18 @@ function postFetch(name, description, date, time, list_id){
             body: JSON.stringify(bodyData)
         })
         .then(response => response.json())
-        .then(data => {
-            document.querySelector('#create-reminder-button').value = "CreateStore"
-            editMode.children[0].innerText = data.name
-            editMode.children[1].innerText = data.description
-            editMode.children[2].innerText = data.date
-            editMode.children[3].innerText = data.time
-            editMode = false
+        .then(reminder => {
+            if(!reminder.status){
+                document.querySelector('#create-reminder-button').value = "CreateStore"
+                document.querySelector('form').reset()
+                editMode.children[0].innerText = reminder.name
+                editMode.children[1].innerText = reminder.description
+                editMode.children[2].innerText = reminder.date
+                editMode.children[3].innerText = reminder.time
+                editMode = false
+            }else{
+                alert(reminder.errors)
+            }
         })
         .catch(err => console.log(err))
     }else {
@@ -91,13 +96,18 @@ function postFetch(name, description, date, time, list_id){
     })
     .then(response => response.json())
     .then(reminder => {
-        const reminderData = reminder.data
-        //render json response
-        let newReminder = new Reminder(reminderData, reminderData.attributes)
-        // calling the instance method
-        document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
+        if(!reminder.status){
+            const reminderData = reminder.data
+            //render json response
+            let newReminder = new Reminder(reminderData, reminderData.attributes)
+            // calling the instance method
+            document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
+            document.querySelector('form').reset()
+        }else{
+            alert(reminder.errors)
+        }
     })
-    // .catch(err=> console.log(err))
+    .catch(err=> console.log(err))
     }
 }
 
