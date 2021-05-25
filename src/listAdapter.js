@@ -40,5 +40,26 @@ class ListAdapter{
         })
         .catch(err=> console.log(err))
     }
+    
+    editList(editMode, bodyData){
+        fetch(this.baseListURL+`/${editMode.dataset.id}`, {
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(bodyData)
+        })
+        .then(response => response.json())
+        .then(list => {
+            if(!list.status){
+                document.querySelector('#create-list-button').value = "Create new list"
+                document.querySelector('form').reset()
+                editMode.children[0].innerText = list.name
+                editMode.children[1].innerText = list.color
+                editMode = false
+            }else{
+                alert(list.errors)
+            }
+        })
+        .catch(err => console.log(err))
+    }
 
 }

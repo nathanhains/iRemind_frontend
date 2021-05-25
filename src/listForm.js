@@ -33,4 +33,21 @@ class ListForm{
         }
     }
 
+    listenEditDelete(){
+        document.querySelector("#list-container").addEventListener("click", this.handleEditDelete)
+    }
+    
+    handleEditDelete = (e) => {
+        const div = e.target.parentElement
+        if (e.target.dataset.action === "delete"){
+            reminderListAdapter.deleteReminder(div)
+        }else if(e.target.dataset.action === "edit") {
+            editMode = div
+    
+            document.querySelector('#create-list-button').value = "Update"
+            document.querySelector('#input-name').value = div.children[0].innerText
+            document.querySelector('#input-color').value = div.children[1].innerText
+        }
+    }
+
 }

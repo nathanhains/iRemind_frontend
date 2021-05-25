@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     // reminderForm.listenEditDelete()
     // reminderAdapter.getReminders()
     listForm.addCreateListForm()
-    // listForm.listenEditDelete()
+    listForm.listenEditDelete()
     listAdapter.getLists()
 })
 
