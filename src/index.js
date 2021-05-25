@@ -34,21 +34,21 @@ function addCreateReminderForm(){
     form.addEventListener("submit", (e) => createFormHandler(e))
 }
 
-function getReminders(){
-    //fetch
-    fetch(endPoint)
-    .then(response => response.json())
-    //modify dom
-    .then(reminders => {
-        // backend serializer sets data into data key 
-        reminders.data.forEach(reminder => {
-            let newReminder = new Reminder(reminder, reminder.attributes)
-            // calling the instance method
-            document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
-        })
+// function getReminders(){
+//     //fetch
+//     fetch(endPoint)
+//     .then(response => response.json())
+//     //modify dom
+//     .then(reminders => {
+//         // backend serializer sets data into data key 
+//         reminders.data.forEach(reminder => {
+//             let newReminder = new Reminder(reminder, reminder.attributes)
+//             // calling the instance method
+//             document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
+//         })
 
-    })
-}
+//     })
+// }
 
 function createFormHandler(e){
     e.preventDefault()
