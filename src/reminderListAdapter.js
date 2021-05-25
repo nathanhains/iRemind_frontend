@@ -17,6 +17,30 @@ class ReminderListAdapter{
         })
     }
 
+    addReminder(){
+        fetch(this.baseReminderURL, {
+            method: "POST",
+            // json
+            headers: {"Content-Type": "application/json"},
+            // how to send back the data to the api
+            body: JSON.stringify(bodyData)
+        })
+        .then(response => response.json())
+        .then(reminder => {
+            if(!reminder.status){
+                const reminderData = reminder.data
+                //render json response
+                let newReminder = new Reminder(reminderData, reminderData.attributes)
+                // calling the instance method
+                document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
+                document.querySelector('form').reset()
+            }else{
+                alert(reminder.errors)
+            }
+        })
+        .catch(err=> console.log(err))
+    }
+
     editReminder(editMode){
         fetch(this.baseReminderURL+`/${editMode.dataset.id}`, {
             method: "PATCH",
@@ -39,20 +63,4 @@ class ReminderListAdapter{
         })
         .catch(err => console.log(err))
     }
-
-    // function getReminders(){
-    //     //fetch
-    //     fetch(endPoint)
-    //     .then(response => response.json())
-    //     //modify dom
-    //     .then(reminders => {
-    //         // backend serializer sets data into data key 
-    //         reminders.data.forEach(reminder => {
-    //             let newReminder = new Reminder(reminder, reminder.attributes)
-    //             // calling the instance method
-    //             document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
-    //         })
-    
-    //     })
-    // }
 }

@@ -87,27 +87,27 @@ function postFetch(name, description, date, time, list_id){
         // .catch(err => console.log(err))
     }else {
     // you only need to establish key names once if they are the same
-    fetch(endPoint, {
-        method: "POST",
-        // json
-        headers: {"Content-Type": "application/json"},
-        // how to send back the data to the api
-        body: JSON.stringify(bodyData)
-    })
-    .then(response => response.json())
-    .then(reminder => {
-        if(!reminder.status){
-            const reminderData = reminder.data
-            //render json response
-            let newReminder = new Reminder(reminderData, reminderData.attributes)
-            // calling the instance method
-            document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
-            document.querySelector('form').reset()
-        }else{
-            alert(reminder.errors)
-        }
-    })
-    .catch(err=> console.log(err))
+    // fetch(endPoint, {
+    //     method: "POST",
+    //     // json
+    //     headers: {"Content-Type": "application/json"},
+    //     // how to send back the data to the api
+    //     body: JSON.stringify(bodyData)
+    // })
+    // .then(response => response.json())
+    // .then(reminder => {
+    //     if(!reminder.status){
+    //         const reminderData = reminder.data
+    //         //render json response
+    //         let newReminder = new Reminder(reminderData, reminderData.attributes)
+    //         // calling the instance method
+    //         document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
+    //         document.querySelector('form').reset()
+    //     }else{
+    //         alert(reminder.errors)
+    //     }
+    // })
+    // .catch(err=> console.log(err))
     }
 }
 
