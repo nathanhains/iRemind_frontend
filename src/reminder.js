@@ -15,7 +15,7 @@ class Reminder {
     renderReminder(){
         // we set attributes keyword in our constructor
         return `
-            <li data-id=${this.id}>
+            <li id="reminder-container" data-id=${this.id}>
                 <h1>${this.name}</h1>
                 <h3>${this.description}</h1>
                 <h3>${this.date} - ${this.time}</h3>

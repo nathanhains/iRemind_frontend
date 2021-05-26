@@ -1,6 +1,6 @@
 class ListForm{
     addCreateListForm(){
-        const formContainer = document.querySelector(".form-container")
+        const listFormContainer = document.querySelector(".list-form-container")
         const form = document.createElement('form')
         form.innerHTML = `
                 <h3>Create a new list</h3>
@@ -11,7 +11,7 @@ class ListForm{
                 <br><br>
                 <input id="create-list-button" type="submit" name="submit" value="Create new list" class="submit">
         `
-        formContainer.append(form)
+        listFormContainer.append(form)
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }
 
@@ -59,5 +59,6 @@ class ListForm{
             }
         }
     }
+    
 
 }

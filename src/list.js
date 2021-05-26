@@ -30,6 +30,8 @@ class List {
         this.reminders.forEach(r => ul.innerHTML += r.renderReminder())
         div.append(ul)
         currentReminders = ul
-        console.log(currentReminders)
+        if (ul.innerHTML!=""){
+            reminderForm.listenEditDelete()
+        }
     }
 }
