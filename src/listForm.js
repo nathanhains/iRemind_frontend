@@ -43,15 +43,18 @@ class ListForm{
         if (action === "delete"){
             listAdapter.deleteList(div)
         }else if(action === "edit") {
-            editModeList = div
-    
-            document.querySelector('#create-list-button').value = "Update"
-            document.querySelector('#list-name').value = div.children[0].innerText
-            document.querySelector('#list-color').value = div.children[1].innerText
-            document.querySelector("#display-list-form").style.display = "none"
-            document.querySelector("#display-reminder-form").style.display = "none"
-            document.querySelector(".list-form-container").style.display = ""
+            if(editModeList === div){
+                this.handleHideListForm()
+                editModeList = false
+            }else{
+                editModeList = div
 
+                document.querySelector('#create-list-button').value = "Update"
+                document.querySelector('#list-name').value = div.children[0].innerText
+                document.querySelector('#list-color').value = div.children[1].innerText
+                
+                this.handleDisplayListForm(e)
+            }   
         }else if(action === "details"){
             if (currentReminders) {
                 currentReminders.remove()
@@ -72,6 +75,8 @@ class ListForm{
         document.querySelector("#display-list-form").style.display = "none"
         document.querySelector("#display-reminder-form").style.display = "none"
         document.querySelector(".list-form-container").style.display = ""
+        document.querySelector(".reminder-form-container").style.display = "none"
+        editModeReminder = false
     }
 
     handleHideListForm() {

@@ -80,6 +80,8 @@ class ReminderForm{
         document.querySelector("#display-list-form").style.display = "none"
         document.querySelector("#display-reminder-form").style.display = "none"
         document.querySelector(".reminder-form-container").style.display = ""
+        document.querySelector(".list-form-container").style.display = "none"
+        editModeList = false
     }
 
     handleHideReminderForm() {
