@@ -27,6 +27,7 @@ class List {
     renderReminders(){
         const div = document.getElementById(`list-${this.id}`)
         const ul = document.createElement('ul')
+        ul.setAttribute('id', 'reminder-container')
         this.reminders.forEach(r => ul.innerHTML += r.renderReminder())
         div.append(ul)
         currentReminders = ul

@@ -26,8 +26,8 @@ class ListForm{
     postFetch = (name, color) => {
         const bodyData = {name, color}
     
-        if(editMode){
-            listAdapter.editList(editMode, bodyData)
+        if(editModeList){
+            listAdapter.editList(editModeList, bodyData)
         }else {
             listAdapter.addList(bodyData)
         }
@@ -43,7 +43,7 @@ class ListForm{
         if (action === "delete"){
             listAdapter.deleteList(div)
         }else if(action === "edit") {
-            editMode = div
+            editModeList = div
     
             document.querySelector('#create-list-button').value = "Update"
             document.querySelector('#list-name').value = div.children[0].innerText

@@ -38,8 +38,8 @@ class ReminderForm{
     postFetch = (name, description, date, time, list_id) => {
         const bodyData = {name, description, date, time, list_id}
     
-        if(editMode){
-            reminderAdapter.editReminder(editMode, bodyData)
+        if(editModeReminder){
+            reminderAdapter.editReminder(editModeReminder, bodyData)
         }else {
             reminderAdapter.addReminder(bodyData)
             
@@ -55,15 +55,20 @@ class ReminderForm{
         if (e.target.dataset.action === "deleteReminder"){
             reminderAdapter.deleteReminder(div)
         }else if(e.target.dataset.action === "editReminder") {
-            editMode = div
-    
-            document.querySelector('#create-reminder-button').value = "Update"
-            document.querySelector('#reminder-name').value = div.children[0].innerText
-            document.querySelector('#reminder-description').value = div.children[1].innerText
-            document.querySelector('#reminder-date').value = div.children[2].innerText
-            document.querySelector('#reminder-time').value = div.children[3].innerText
-            
-            this.handleDisplayReminderForm(e)
+            if(editModeReminder === div){
+                this.handleHideReminderForm()
+                editModeReminder = false
+            }else{
+                editModeReminder = div
+        
+                document.querySelector('#create-reminder-button').value = "Update"
+                document.querySelector('#reminder-name').value = div.children[0].innerText
+                document.querySelector('#reminder-description').value = div.children[1].innerText
+                document.querySelector('#reminder-date').value = div.children[2].innerText
+                document.querySelector('#reminder-time').value = div.children[3].innerText
+                
+                this.handleDisplayReminderForm(e)
+            }
         }
     }
 
