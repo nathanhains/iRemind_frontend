@@ -62,7 +62,8 @@ class ReminderForm{
             document.querySelector('#reminder-description').value = div.children[1].innerText
             document.querySelector('#reminder-date').value = div.children[2].innerText
             document.querySelector('#reminder-time').value = div.children[3].innerText
-    
+            
+            this.handleDisplayReminderForm(e)
         }
     }
 
