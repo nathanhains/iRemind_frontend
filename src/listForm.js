@@ -11,6 +11,7 @@ class ListForm{
                 <br><br>
                 <input id="create-list-button" type="submit" name="submit" value="Create new list" class="submit">
         `
+        
         listFormContainer.append(form)
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }

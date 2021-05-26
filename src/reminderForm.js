@@ -14,12 +14,14 @@ class ReminderForm{
                 <input id="reminder-time" type="text" name="time" placeholder="Time">
                 <br><br>
                 <select id="lists" name="lists">
-                    <option value="1">Forgetful List</option>
                 </select>
                 <br><br>
     
                 <input id="create-reminder-button" type="submit" name="submit" value="Create new reminder" class="submit">
         `
+        List.all.forEach(l => {
+            form.querySelector('select').innerHTML += `<option value="${l.id}">${l.name}</option>`
+        })
         reminderFormContainer.append(form)
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }
@@ -77,6 +79,7 @@ class ReminderForm{
     }
 
     handleDisplayReminderForm = (e) => {
+        reminderForm.addCreateReminderForm()
         document.querySelector("#display-list-form").style.display = "none"
         document.querySelector("#display-reminder-form").style.display = "none"
         document.querySelector(".reminder-form-container").style.display = ""

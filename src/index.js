@@ -6,9 +6,10 @@ let editModeList = false
 let currentReminders = false
 const listAdapter = new ListAdapter("http://localhost:3000")
 const listForm = new ListForm
+const colors = ['Red', 'Blue', 'Yellow', 'Green', 'Blue', 'Purple', 'Black', 'White']
 
 document.addEventListener('DOMContentLoaded', () =>{
-    reminderForm.addCreateReminderForm()
+    // take create reminder form out due to async, we need list objects before form renders
     reminderForm.newReminderEventListener()
     listForm.addCreateListForm()
     listForm.listenEditDelete()
