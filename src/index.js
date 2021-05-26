@@ -3,6 +3,7 @@
 // const reminderForm = new ReminderForm
 // event listener, fetch, modify dom
 let editMode = false
+let currentReminders = false
 const listAdapter = new ListAdapter("http://localhost:3000")
 const listForm = new ListForm
 
