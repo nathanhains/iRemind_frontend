@@ -8,6 +8,7 @@ class Reminder {
         this.description = reminderAttributes.description
         this.date = reminderAttributes.date
         this.time = reminderAttributes.time
+        this.list_id = reminderAttributes.list_id
         Reminder.all.push(this)
     }
 

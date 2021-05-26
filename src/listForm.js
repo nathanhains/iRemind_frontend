@@ -5,9 +5,9 @@ class ListForm{
         form.innerHTML = `
                 <h3>Create a new list</h3>
     
-                <input id="input-name" type="text" name="name" placeholder="Name">
+                <input id="list-name" type="text" name="name" placeholder="Name">
                 <br><br>
-                <input id="input-color" type="text" name="color" placeholder="Color"></input>
+                <input id="list-color" type="text" name="color" placeholder="Color"></input>
                 <br><br>
                 <input id="create-list-button" type="submit" name="submit" value="Create new list" class="submit">
         `
@@ -18,8 +18,8 @@ class ListForm{
     createFormHandler = (e) => {
         e.preventDefault()
         //e.target to get form
-            const nameInput = document.querySelector("#input-name").value
-            const colorInput = document.querySelector("#input-color").value
+            const nameInput = document.querySelector("#list-name").value
+            const colorInput = document.querySelector("#list-color").value
             this.postFetch(nameInput, colorInput)
     }
 
@@ -46,8 +46,12 @@ class ListForm{
             editMode = div
     
             document.querySelector('#create-list-button').value = "Update"
-            document.querySelector('#input-name').value = div.children[0].innerText
-            document.querySelector('#input-color').value = div.children[1].innerText
+            document.querySelector('#list-name').value = div.children[0].innerText
+            document.querySelector('#list-color').value = div.children[1].innerText
+            document.querySelector("#display-list-form").style.display = "none"
+            document.querySelector("#display-reminder-form").style.display = "none"
+            document.querySelector(".list-form-container").style.display = ""
+
         }else if(action === "details"){
             if (currentReminders) {
                 currentReminders.remove()
@@ -60,5 +64,26 @@ class ListForm{
         }
     }
     
+    addListEventListener(){
+        document.querySelector("#display-list-form").addEventListener("click", (e) => this.handleDisplayListForm(e))
+    }
+
+    handleDisplayListForm = (e) => {
+        document.querySelector("#display-list-form").style.display = "none"
+        document.querySelector("#display-reminder-form").style.display = "none"
+        document.querySelector(".list-form-container").style.display = ""
+    }
+
+    handleHideListForm() {
+        document.querySelector("#display-list-form").style.display = ""
+        document.querySelector("#display-reminder-form").style.display = ""
+        document.querySelector(".list-form-container").style.display = "none"
+    }
+
+    displayReminderFromForm(reminder){
+        const l = List.all.find(l => parseInt(l.id) === reminder.list_id)
+        l.reminders.push(reminder)
+        l.renderReminders()
+    }
 
 }

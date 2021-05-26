@@ -8,8 +8,10 @@ const listForm = new ListForm
 
 document.addEventListener('DOMContentLoaded', () =>{
     reminderForm.addCreateReminderForm()
+    reminderForm.newReminderEventListener()
     listForm.addCreateListForm()
     listForm.listenEditDelete()
+    listForm.addListEventListener()
     listAdapter.getLists()
 })
 

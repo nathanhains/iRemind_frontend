@@ -32,8 +32,9 @@ class ReminderAdapter{
                 //render json response
                 let newReminder = new Reminder(reminderData, reminderData.attributes)
                 // calling the instance method
-                document.querySelector("#reminder-container").innerHTML += newReminder.renderReminder()
+                listForm.displayReminderFromForm(newReminder)
                 document.querySelector('form').reset()
+                reminderForm.handleHideReminderForm()
             }else{
                 alert(reminder.errors)
             }
@@ -57,6 +58,7 @@ class ReminderAdapter{
                 editMode.children[2].innerText = reminder.date
                 editMode.children[3].innerText = reminder.time
                 editMode = false
+                reminderForm.handleHideReminderForm()
             }else{
                 alert(reminder.errors)
             }
