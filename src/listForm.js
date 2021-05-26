@@ -3,7 +3,7 @@ class ListForm{
         const formContainer = document.querySelector(".form-container")
         const form = document.createElement('form')
         form.innerHTML = `
-                <h3>Create a new reminder</h3>
+                <h3>Create a new list</h3>
     
                 <input id="input-name" type="text" name="name" placeholder="Name">
                 <br><br>
@@ -39,14 +39,24 @@ class ListForm{
     
     handleEditDelete = (e) => {
         const div = e.target.parentElement
-        if (e.target.dataset.action === "delete"){
+        const action = e.target.dataset.action 
+        if (action === "delete"){
             listAdapter.deleteList(div)
-        }else if(e.target.dataset.action === "edit") {
+        }else if(action === "edit") {
             editMode = div
     
             document.querySelector('#create-list-button').value = "Update"
             document.querySelector('#input-name').value = div.children[0].innerText
             document.querySelector('#input-color').value = div.children[1].innerText
+        }else if(action === "details"){
+            if (currentReminders) {
+                currentReminders.remove()
+                currentReminders = false
+            }else{
+            console.log("displaying reminders", div.dataset.id)
+            const l = List.all.find(l => l.id === div.dataset.id)
+            l.renderReminders()
+            }
         }
     }
 
