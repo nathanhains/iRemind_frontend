@@ -7,11 +7,13 @@ class ListForm{
     
                 <input id="list-name" type="text" name="name" placeholder="Name">
                 <br><br>
-                <input id="list-color" type="text" name="color" placeholder="Color"></input>
+                <select id="list-color" name="list-color"></select>
                 <br><br>
                 <input id="create-list-button" type="submit" name="submit" value="Create new list" class="submit">
         `
-        
+        colors.forEach(c => {
+            form.querySelector('select').innerHTML += `<option value="${c}">${c}</option>`
+        })
         listFormContainer.append(form)
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }
