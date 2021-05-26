@@ -9,9 +9,9 @@ class ReminderForm{
                 <br><br>
                 <textarea id="reminder-description" type="text" name="description" placeholder="Description"></textarea>
                 <br><br>
-                <input id="reminder-date" type="text" name="date" placeholder="Date">
+                <input id="reminder-date" type="date" name="date" placeholder="Date">
                 <br><br>
-                <input id="reminder-time" type="text" name="time" placeholder="Time">
+                <input id="reminder-time" type="time" name="time" placeholder="Time">
                 <br><br>
                 <select id="lists" name="lists">
                 </select>
@@ -32,10 +32,20 @@ class ReminderForm{
             const nameInput = document.querySelector("#reminder-name").value
             const descriptionInput = document.querySelector("#reminder-description").value
             const dateInput = document.querySelector("#reminder-date").value
-            const timeInput = document.querySelector("#reminder-time").value
+            const timeInput = this.tConv24(document.querySelector("#reminder-time").value)
             const listInput = parseInt(document.querySelector("#lists").value)
             this.postFetch(nameInput, descriptionInput, dateInput, timeInput, listInput)
     }
+
+    tConv24(time24) {
+        var ts = time24;
+        var H = +ts.substr(0, 2);
+        var h = (H % 12) || 12;
+        h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+        var ampm = H < 12 ? " AM" : " PM";
+        ts = h + ts.substr(2, 3) + ampm;
+        return ts;
+    };
 
     postFetch = (name, description, date, time, list_id) => {
         const bodyData = {name, description, date, time, list_id}
@@ -62,14 +72,12 @@ class ReminderForm{
                 editModeReminder = false
             }else{
                 editModeReminder = div
-        
+                this.handleDisplayReminderForm(e)
                 document.querySelector('#create-reminder-button').value = "Update"
                 document.querySelector('#reminder-name').value = div.children[0].innerText
                 document.querySelector('#reminder-description').value = div.children[1].innerText
                 document.querySelector('#reminder-date').value = div.children[2].innerText
                 document.querySelector('#reminder-time').value = div.children[3].innerText
-                
-                this.handleDisplayReminderForm(e)
             }
         }
     }
@@ -79,7 +87,6 @@ class ReminderForm{
     }
 
     handleDisplayReminderForm = (e) => {
-        reminderForm.addCreateReminderForm()
         document.querySelector("#display-list-form").style.display = "none"
         document.querySelector("#display-reminder-form").style.display = "none"
         document.querySelector(".reminder-form-container").style.display = ""

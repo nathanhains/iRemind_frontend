@@ -19,7 +19,7 @@ class Reminder {
             <li data-id=${this.id}>
                 <h1>${this.name}</h1>
                 <h3>${this.description}</h1>
-                <h3>${this.date} - ${this.time}</h3>
+                <h3>${this.date}</h3> <h3>${this.time}</h3>
                 <button data-action='editReminder' data-id=${this.id}>Edit</button> <button data-action='deleteReminder' data-id=${this.id}>X</button>
             </li>
             <br><br>

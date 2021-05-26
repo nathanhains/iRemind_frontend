@@ -13,6 +13,7 @@ class ListAdapter{
                 let newList = new List(list, list.attributes)
                 // calling the instance method
                 document.querySelector("#list-container").innerHTML += newList.renderList()
+                reminderForm.addCreateReminderForm()
             })
         })
     }
