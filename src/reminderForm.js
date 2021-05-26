@@ -1,6 +1,6 @@
 class ReminderForm{
     addCreateReminderForm(){
-        const formContainer = document.querySelector(".form-container")
+        const reminderFormContainer = document.querySelector(".reminder-form-container")
         const form = document.createElement('form')
         form.innerHTML = `
                 <h3>Create a new reminder</h3>
@@ -20,7 +20,7 @@ class ReminderForm{
     
                 <input id="create-reminder-button" type="submit" name="submit" value="Create new reminder" class="submit">
         `
-        formContainer.append(form)
+        reminderFormContainer.append(form)
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }
     // if an event listener use arrow function to prevent constructor syntax
@@ -52,9 +52,9 @@ class ReminderForm{
     
     handleEditDelete = (e) => {
         const div = e.target.parentElement
-        if (e.target.dataset.action === "delete"){
-            reminderListAdapter.deleteReminder(div)
-        }else if(e.target.dataset.action === "edit") {
+        if (e.target.dataset.action === "deleteReminder"){
+            reminderAdapter.deleteReminder(div)
+        }else if(e.target.dataset.action === "editReminder") {
             editMode = div
     
             document.querySelector('#create-reminder-button').value = "Update"

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iRemind</title>
     <script type="text/javascript" src="src/reminder.js"></script>
-    <!-- <script type="text/javascript" src="src/reminderListAdapter.js"></script>  
-    <script type="text/javascript" src="src/reminderForm.js"></script> -->
+    <script type="text/javascript" src="src/reminderAdapter.js"></script>  
+    <script type="text/javascript" src="src/reminderForm.js"></script>
     <script type="text/javascript" src="src/list.js"></script>
     <script type="text/javascript" src="src/listAdapter.js"></script>  
     <script type="text/javascript" src="src/listForm.js"></script> 
@@ -14,13 +14,17 @@
 </head>
 <body>
 
-    <div class="form-container">
+    <button id="display-list-form">Add List</button>
+    <button id="display-reminder-form">New Reminder</button>
+
+    <div class="list-form-container" style="display: none">
     
     </div>
 
-    <!-- <div id="reminder-container">
+    <div class="reminder-form-container" style="display: none">
     
-    </div> -->
+    </div>
+
     <div id="list-container">
     
     </div>
