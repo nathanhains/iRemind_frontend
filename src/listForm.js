@@ -9,7 +9,7 @@ class ListForm{
                 <br>
                 <select class="mb-2" id="list-color" name="list-color"></select>
                 <br>
-                <input id="create-list-button" type="submit" name="submit" value="Done" class="submit btn btn-sm btn-dark">
+                <input id="create-list-button" type="submit" name="submit" value="Done" class="submit btn btn-sm btn-dark mb-1">
         `
         colors.forEach(c => {
             form.querySelector('select').innerHTML += `<option value="${c}">${c}</option>`
