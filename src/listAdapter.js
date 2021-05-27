@@ -35,6 +35,7 @@ class ListAdapter{
                 // calling the instance method
                 document.querySelector("#list-container").innerHTML += newList.renderList()
                 document.querySelector('form').reset()
+                location.reload()
                 listForm.handleHideListForm()
             }else{
                 alert(list.errors)
@@ -57,6 +58,7 @@ class ListAdapter{
                 editMode.children[0].children[0].children[0].children[0].children[0].innerText = list.name
                 editMode.children[0].style.border= `2px solid ${list.color}`
                 editMode = false
+                location.reload()
                 listForm.handleHideListForm()
             }else{
                 alert(list.errors)
