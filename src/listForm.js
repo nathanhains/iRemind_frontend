@@ -54,7 +54,7 @@ class ListForm{
                 editModeList = div
                
                 document.querySelector('#list-form-title').innerText = "Update list"
-                document.querySelector('#list-name').value = div.children[0].children[0].children[0].children[0].children[0].innerText
+                document.querySelector('#list-name').value = e.target.parentElement.firstElementChild.innerText
                 document.querySelector('#list-color').options.value = div.children[0].style.border.split(" ")[2]
                 
                 this.handleDisplayListForm(e)
