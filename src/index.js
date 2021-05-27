@@ -15,5 +15,12 @@ document.addEventListener('DOMContentLoaded', () =>{
     listForm.listenEditDelete()
     listForm.addListEventListener()
     listAdapter.getLists()
+    addLogoListener()
 })
+
+
+function addLogoListener(){
+    const logo = document.querySelector(".refresh")
+    logo.addEventListener('click', location.reload.bind(location))
+}
 

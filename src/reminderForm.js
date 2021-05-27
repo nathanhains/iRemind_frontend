@@ -3,21 +3,20 @@ class ReminderForm{
         const reminderFormContainer = document.querySelector(".reminder-form-container")
         const form = document.createElement('form')
         form.innerHTML = `
-                <h3>Create a new reminder</h3>
+                <h3 style="margin: auto;">Create a new reminder</h3>
     
-                <input id="reminder-name" type="text" name="name" placeholder="Name">
-                <br><br>
+                <input class="mb-2" id="reminder-name" type="text" name="name" placeholder="Name">
+                <br>
                 <textarea id="reminder-description" type="text" name="description" placeholder="Description"></textarea>
-                <br><br>
+                <br>
                 <input id="reminder-date" type="date" name="date" placeholder="Date">
-                <br><br>
-                <input id="reminder-time" type="time" name="time" placeholder="Time">
-                <br><br>
-                <select id="lists" name="lists">
+                <input class="mb-2" id="reminder-time" type="time" name="time" placeholder="Time">
+                <br>
+                <select class="mb-2" id="lists" name="lists">
                 </select>
-                <br><br>
+                <br>
     
-                <input id="create-reminder-button" type="submit" name="submit" value="Create new reminder" class="submit">
+                <input id="create-reminder-button" type="submit" name="submit" value="Create new reminder" class="submit btn btn-sm btn-dark">
         `
         List.all.forEach(l => {
             form.querySelector('select').innerHTML += `<option value="${l.id}">${l.name}</option>`
@@ -76,8 +75,8 @@ class ReminderForm{
                 document.querySelector('#create-reminder-button').value = "Update"
                 document.querySelector('#reminder-name').value = div.children[0].innerText
                 document.querySelector('#reminder-description').value = div.children[1].innerText
-                document.querySelector('#reminder-date').value = div.children[2].innerText
-                document.querySelector('#reminder-time').value = div.children[3].innerText
+                document.querySelector('#reminder-date').value = div.children[2].innerText.split(", ")[0]
+                document.querySelector('#reminder-time').value = div.children[2].firstElementChild.innerText
             }
         }
     }

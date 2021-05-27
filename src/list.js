@@ -14,14 +14,23 @@ class List {
     renderList(){
         // we set attributes keyword in our constructor
         return `
-            <div id="list-${this.id}" data-id=${this.id}>
-                <h1>${this.name}</h1>
-                <h3>${this.color}</h1>
-                <button data-action="details">Details</button>
-                <button data-action='edit' data-id=${this.id}>Edit</button> <button data-action='delete' data-id=${this.id}>X</button>
+        <div id="list-${this.id}" data-id=${this.id} class="row">
+        <div class="card mt-1 mb-1 box-shadow"  style="border: 2px solid ${this.color};">
+          <div class="card-body">
+            <div class="d-flex data-id=${this.id} justify-content-between align-items-center">
+            <button type="button" data-action='delete' data-id=${this.id} class="btn btn-sm fas fa-times"></button>
+              <div class="btn-group" data-id=${this.id}>
+                <h3>${this.name} </h3> <button type="button" data-action='edit' data-id=${this.id} class="btn btn-sm fas fa-edit"></button>
+              </div>
+              <button type="button" data-action="details" class="btn btn-sm fas fa-angle-right fa-lg"></button>
             </div>
-            <br><br>
+          </div>
+        </div>
+        </div>
         `
+
+
+        
     }
 
     renderReminders(){
