@@ -13,8 +13,8 @@ class ListAdapter{
                 let newList = new List(list, list.attributes)
                 // calling the instance method
                 document.querySelector("#list-container").innerHTML += newList.renderList()
-                reminderForm.addCreateReminderForm()
             })
+            reminderForm.addCreateReminderForm()
         })
     }
 
@@ -52,10 +52,10 @@ class ListAdapter{
         .then(response => response.json())
         .then(list => {
             if(!list.status){
-                document.querySelector('#create-list-button').value = "Create new list"
+                document.querySelector('#list-form-title').innerText = "Create a new list"
                 document.querySelector('form').reset()
-                editMode.children[0].innerText = list.name
-                editMode.children[1].innerText = list.color
+                editMode.children[0].children[0].children[0].children[0].children[0].innerText = list.name
+                editMode.children[0].style.border= `2px solid ${list.color}`
                 editMode = false
                 listForm.handleHideListForm()
             }else{

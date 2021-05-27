@@ -16,13 +16,12 @@ class Reminder {
     renderReminder(){
         // we set attributes keyword in our constructor
         return `
-            <li data-id=${this.id}>
+            <div data-id=${this.id}>
                 <h1>${this.name}</h1>
-                <h3>${this.description}</h1>
-                <h3>${this.date}</h3> <h3>${this.time}</h3>
-                <button data-action='editReminder' data-id=${this.id}>Edit</button> <button data-action='deleteReminder' data-id=${this.id}>X</button>
-            </li>
-            <br><br>
+                <h4>${this.description}</h4>
+                <h4>${this.date}, <span>${this.time}</span></h4>
+                <button data-action='editReminder' class="btn btn-sm btn-dark far fa-edit" data-id=${this.id}></button> <button data-action='deleteReminder' class="btn btn-sm btn-dark fas fa-trash" data-id=${this.id}></button>
+            </div>
         `
     }
 }

@@ -51,13 +51,12 @@ class ReminderAdapter{
         .then(response => response.json())
         .then(reminder => {
             if(!reminder.status){
-                debugger
                 document.querySelector('#create-reminder-button').value = "Create new reminder"
                 document.querySelector('form').reset()
                 editMode.children[0].innerText = reminder.name
                 editMode.children[1].innerText = reminder.description
                 editMode.children[2].innerText = reminder.date
-                editMode.children[3].innerText = reminder.time
+                editMode.children[2].innerHTML += `<span>, ${reminder.time}</span>`
                 editMode = false
                 reminderForm.handleHideReminderForm()
             }else{
