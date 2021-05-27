@@ -54,7 +54,7 @@ class ListAdapter{
         .then(list => {
             if(!list.status){
                 document.querySelector('#list-form-title').innerText = "Create a new list"
-                document.querySelector('form').reset()
+                document.querySelector('list-form').reset()
                 editMode.children[0].children[0].children[0].children[1].children[0].innerText = list.name
                 editMode.children[0].style.border= `2px solid ${list.color}`
                 editMode = false

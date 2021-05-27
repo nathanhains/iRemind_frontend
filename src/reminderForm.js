@@ -21,6 +21,7 @@ class ReminderForm{
         List.all.forEach(l => {
             form.querySelector('select').innerHTML += `<option value="${l.id}">${l.name}</option>`
         })
+        form.setAttribute('id', 'reminder-form')
         reminderFormContainer.append(form)
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }

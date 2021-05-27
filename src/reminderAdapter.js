@@ -33,7 +33,8 @@ class ReminderAdapter{
                 let newReminder = new Reminder(reminderData, reminderData.attributes)
                 // calling the instance method
                 listForm.displayReminderFromForm(newReminder)
-                document.querySelector('form').reset()
+                debugger
+                document.querySelector('#reminder-form').reset()
                 reminderForm.handleHideReminderForm()
             }else{
                 alert(reminder.errors)

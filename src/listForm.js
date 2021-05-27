@@ -14,6 +14,7 @@ class ListForm{
         colors.forEach(c => {
             form.querySelector('select').innerHTML += `<option value="${c}">${c}</option>`
         })
+        form.setAttribute('id', 'list-form')
         listFormContainer.append(form)
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }
