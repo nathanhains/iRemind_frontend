@@ -64,6 +64,7 @@ class ReminderForm{
     }
     
     handleEditDelete = (e) => {
+        debugger
         const div = e.target.parentElement
         if (e.target.dataset.action === "deleteReminder"){
             reminderAdapter.deleteReminder(div)

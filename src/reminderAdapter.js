@@ -74,10 +74,10 @@ class ReminderAdapter{
         .then(response => response.json())
         .then(data => {
             if (data.message === "Successfully deleted"){
-                // let list = List.all.find(l => l.id = parseInt(div.dataset.id))
-                // let reminder = list.reminders.find(r => r.id = parseInt(div.dataset.id))
-                // let index = list.reminders.indexOf(reminder)
-                // list.reminders.splice(index, 1)
+                let list = List.all.find(l => l.id  = div.parentElement.parentElement.dataset.id)
+                let reminder = list.reminders.find(r => r.id = parseInt(div.dataset.id))
+                let index = list.reminders.indexOf(reminder)
+                list.reminders.splice(index, 1)
              
                 div.remove()
             }else {
