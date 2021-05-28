@@ -33,7 +33,6 @@ class ReminderAdapter{
                 let newReminder = new Reminder(reminderData, reminderData.attributes)
                 // calling the instance method
                 listForm.displayReminderFromForm(newReminder)
-                debugger
                 document.querySelector('#reminder-form').reset()
                 reminderForm.handleHideReminderForm()
             }else{
@@ -52,8 +51,9 @@ class ReminderAdapter{
         .then(response => response.json())
         .then(reminder => {
             if(!reminder.status){
+                document.querySelector('#reminder-form-title').innerText = "Create a new reminder"
                 document.querySelector('#create-reminder-button').value = "Create new reminder"
-                document.querySelector('form').reset()
+                document.querySelector('#reminder-form').reset()
                 editMode.children[0].innerText = reminder.name
                 editMode.children[1].innerText = reminder.description
                 editMode.children[2].innerText = reminder.date
@@ -74,10 +74,11 @@ class ReminderAdapter{
         .then(response => response.json())
         .then(data => {
             if (data.message === "Successfully deleted"){
-                let list = List.all.find(l => l.reminders.id = parseInt(div.dataset.id))
-                let reminder = list.reminders.find(r => r.id = parseInt(div.dataset.id))
-                let index = list.reminders.indexOf(reminder)
-                list.reminders.splice(index, 1)
+                // let list = List.all.find(l => l.id = parseInt(div.dataset.id))
+                // let reminder = list.reminders.find(r => r.id = parseInt(div.dataset.id))
+                // let index = list.reminders.indexOf(reminder)
+                // list.reminders.splice(index, 1)
+             
                 div.remove()
             }else {
                 alert(data.message)

@@ -36,7 +36,6 @@ class List {
     renderReminders(){
         const div = document.getElementById(`list-${this.id}`)
         if(div.querySelector('#reminder-container') != null){
-          debugger
           let elem = div.querySelector('#reminder-container');
           elem.parentNode.removeChild(elem)
         }
@@ -44,7 +43,6 @@ class List {
         ul.setAttribute('id', 'reminder-container')
         this.reminders.forEach(r => ul.innerHTML += r.renderReminder())
         div.append(ul)
-        currentReminders = ul
         if (ul.innerHTML!=""){
             reminderForm.listenEditDelete()
         }

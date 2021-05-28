@@ -62,14 +62,13 @@ class ListForm{
             }   
         }else if(action === "details"){
             const div = e.target.parentElement.parentElement.parentElement.parentElement
-            if (currentReminders) {
-                currentReminders.remove()
-                currentReminders = false
-                e.target.className = "btn btn-sm fas fa-angle-right fa-lg"
-            }else{
-            e.target.className = "btn btn-sm fas fa-angle-down fa-lg"
             const l = List.all.find(l => l.id === div.dataset.id)
-            l.renderReminders()
+            if (div.querySelector('ul')) {
+                e.target.className = "btn btn-sm fas fa-angle-right fa-lg"
+                div.querySelector('ul').remove()
+            }else{
+                e.target.className = "btn btn-sm fas fa-angle-down fa-lg"
+                l.renderReminders()
             }
         }
     }
@@ -79,17 +78,19 @@ class ListForm{
     }
 
     handleDisplayListForm = (e) => {
-        document.querySelector("#display-list-form").style.display = "none"
-        document.querySelector("#display-reminder-form").style.display = "none"
+        document.querySelector("#display-list-form").style ="visibility: hidden"
+        document.querySelector("#display-reminder-form").style ="visibility: hidden"
         document.querySelector(".list-form-container").style.display = ""
         document.querySelector(".reminder-form-container").style.display = "none"
+        document.querySelector("#list-container").style = "display: none"
         editModeReminder = false
     }
 
     handleHideListForm() {
-        document.querySelector("#display-list-form").style.display = ""
-        document.querySelector("#display-reminder-form").style.display = ""
+        document.querySelector("#display-list-form").style ="visibility: visible"
+        document.querySelector("#display-reminder-form").style ="visibility: visible"
         document.querySelector(".list-form-container").style.display = "none"
+        document.querySelector("#list-container").style = "display: "
     }
 
     displayReminderFromForm(reminder){

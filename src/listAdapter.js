@@ -34,7 +34,7 @@ class ListAdapter{
                 let newList = new List(listData, listData.attributes)
                 // calling the instance method
                 document.querySelector("#list-container").innerHTML += newList.renderList()
-                document.querySelector('form').reset()
+                document.querySelector('#list-form').reset()
                 location.reload()
                 listForm.handleHideListForm()
             }else{
@@ -54,7 +54,7 @@ class ListAdapter{
         .then(list => {
             if(!list.status){
                 document.querySelector('#list-form-title').innerText = "Create a new list"
-                document.querySelector('list-form').reset()
+                document.querySelector('#list-form').reset()
                 editMode.children[0].children[0].children[0].children[1].children[0].innerText = list.name
                 editMode.children[0].style.border= `2px solid ${list.color}`
                 editMode = false
@@ -74,6 +74,8 @@ class ListAdapter{
         .then(response => response.json())
         .then(data => {
             if (data.message === "Successfully deleted"){
+                let option = document.querySelector('#reminder-form').querySelector('select').querySelector(`#num-${div.dataset.id}`)
+                option.parentNode.removeChild(option)
                 div.remove()
             }else {
                 alert(data.message)
