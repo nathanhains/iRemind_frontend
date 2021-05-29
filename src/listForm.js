@@ -67,7 +67,6 @@ class ListForm{
                 e.target.className = "btn btn-sm fas fa-angle-right fa-lg"
                 div.querySelector('ul').remove()
             }else{
-                e.target.className = "btn btn-sm fas fa-angle-down fa-lg"
                 l.renderReminders()
             }
         }

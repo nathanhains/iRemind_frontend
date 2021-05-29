@@ -42,9 +42,11 @@ class List {
         const ul = document.createElement('ul')
         ul.setAttribute('id', 'reminder-container')
         this.reminders.forEach(r => ul.innerHTML += r.renderReminder())
+        
         div.append(ul)
         if (ul.innerHTML!=""){
             reminderForm.listenEditDelete()
         }
+        div.children[0].children[0].children[0].children[2].className = "btn btn-sm fas fa-angle-down fa-lg"
     }
 }
