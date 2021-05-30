@@ -1,7 +1,7 @@
 class Reminder {
 
     static all = []
-    
+
     constructor(reminder, reminderAttributes) {
         this.id = reminder.id
         this.name = reminderAttributes.name
@@ -13,7 +13,7 @@ class Reminder {
     }
 
     // do not need function inside of classes
-    renderReminder(){
+    renderReminder() {
         // we set attributes keyword in our constructor
         return `
             <div data-id=${this.id}>

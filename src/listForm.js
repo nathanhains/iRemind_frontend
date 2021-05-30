@@ -1,5 +1,5 @@
-class ListForm{
-    addCreateListForm(){
+class ListForm {
+    addCreateListForm() {
         const listFormContainer = document.querySelector(".list-form-container")
         const form = document.createElement('form')
         form.innerHTML = `
@@ -22,63 +22,63 @@ class ListForm{
     createFormHandler = (e) => {
         e.preventDefault()
         //e.target to get form
-            const nameInput = document.querySelector("#list-name").value
-            const colorInput = document.querySelector("#list-color").value
-            this.postFetch(nameInput, colorInput)
+        const nameInput = document.querySelector("#list-name").value
+        const colorInput = document.querySelector("#list-color").value
+        this.postFetch(nameInput, colorInput)
     }
 
     postFetch = (name, color) => {
-        const bodyData = {name, color}
-    
-        if(editModeList){
+        const bodyData = { name, color }
+
+        if (editModeList) {
             listAdapter.editList(editModeList, bodyData)
-        }else {
+        } else {
             listAdapter.addList(bodyData)
         }
     }
 
-    listenEditDelete(){
+    listenEditDelete() {
         document.querySelector("#list-container").addEventListener("click", this.handleEditDelete)
     }
-    
+
     handleEditDelete = (e) => {
-        const action = e.target.dataset.action 
-        if (action === "delete"){
+        const action = e.target.dataset.action
+        if (action === "delete") {
             const div = e.target.parentElement.parentElement.parentElement.parentElement
             listAdapter.deleteList(div)
-        }else if(action === "edit") {
+        } else if (action === "edit") {
             const div = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
-            if(editModeList === div){
+            if (editModeList === div) {
                 this.handleHideListForm()
                 editModeList = false
-            }else{
+            } else {
                 editModeList = div
-               
+
                 document.querySelector('#list-form-title').innerText = "Update list"
                 document.querySelector('#list-name').value = e.target.parentElement.firstElementChild.innerText
                 document.querySelector('#list-color').options.value = div.children[0].style.border.split(" ")[2]
-                
+
                 this.handleDisplayListForm(e)
-            }   
-        }else if(action === "details"){
+            }
+        } else if (action === "details") {
             const div = e.target.parentElement.parentElement.parentElement.parentElement
             const l = List.all.find(l => l.id === div.dataset.id)
             if (div.querySelector('ul')) {
                 e.target.className = "btn btn-sm fas fa-angle-right fa-lg"
                 div.querySelector('ul').remove()
-            }else{
+            } else {
                 l.renderReminders()
             }
         }
     }
-    
-    addListEventListener(){
+
+    addListEventListener() {
         document.querySelector("#display-list-form").addEventListener("click", (e) => this.handleDisplayListForm(e))
     }
 
     handleDisplayListForm = (e) => {
-        document.querySelector("#display-list-form").style ="visibility: hidden"
-        document.querySelector("#display-reminder-form").style ="visibility: hidden"
+        document.querySelector("#display-list-form").style = "visibility: hidden"
+        document.querySelector("#display-reminder-form").style = "visibility: hidden"
         document.querySelector(".list-form-container").style.display = ""
         document.querySelector(".reminder-form-container").style.display = "none"
         document.querySelector("#list-container").style = "display: none"
@@ -86,13 +86,13 @@ class ListForm{
     }
 
     handleHideListForm() {
-        document.querySelector("#display-list-form").style ="visibility: visible"
-        document.querySelector("#display-reminder-form").style ="visibility: visible"
+        document.querySelector("#display-list-form").style = "visibility: visible"
+        document.querySelector("#display-reminder-form").style = "visibility: visible"
         document.querySelector(".list-form-container").style.display = "none"
         document.querySelector("#list-container").style = "display: "
     }
 
-    displayReminderFromForm(reminder){
+    displayReminderFromForm(reminder) {
         const l = List.all.find(l => parseInt(l.id) === reminder.list_id)
         l.reminders.push(reminder)
         l.renderReminders()

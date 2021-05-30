@@ -8,7 +8,7 @@ const listAdapter = new ListAdapter("http://localhost:3000")
 const listForm = new ListForm
 const colors = ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple', 'Black', 'White']
 
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded', () => {
     // take create reminder form out due to async, we need list objects before form renders
     reminderForm.newReminderEventListener()
     listForm.addCreateListForm()
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 })
 
 
-function addLogoListener(){
+function addLogoListener() {
     const logo = document.querySelector(".refresh")
     logo.addEventListener('click', location.reload.bind(location))
 }
