@@ -23,8 +23,28 @@ class ReminderForm {
         })
         form.setAttribute('id', 'reminder-form')
         reminderFormContainer.append(form)
+        this.todaysDate()
         form.addEventListener("submit", (e) => this.createFormHandler(e))
     }
+
+    todaysDate(){
+        let dtToday = new Date();
+    
+        let month = dtToday.getMonth() + 1;
+        let day = dtToday.getDate();
+        let year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        
+        let maxDate = year + '-' + month + '-' + day;
+        document.getElementById('reminder-date').min = maxDate
+    }
+
+
+
+
     // if an event listener use arrow function to prevent constructor syntax
     createFormHandler = (e) => {
         e.preventDefault()
@@ -89,7 +109,7 @@ class ReminderForm {
         document.querySelector("#display-reminder-form").addEventListener("click", (e) => this.handleDisplayReminderForm(e))
     }
 
-    handleDisplayReminderForm = (e) => {
+    handleDisplayReminderForm = () => {
         document.querySelector("#display-list-form").style = "visibility: hidden"
         document.querySelector("#display-reminder-form").style = "visibility: hidden"
         document.querySelector(".reminder-form-container").style.display = ""
