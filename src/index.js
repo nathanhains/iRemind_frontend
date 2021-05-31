@@ -19,8 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-function addLogoListener() {
-    const logo = document.querySelector(".refresh")
-    logo.addEventListener('click', location.reload.bind(location))
+addLogoListener = () => {
+    const logo = document.querySelector(".back")
+    // logo.addEventListener('click', location.reload.bind(location))
+    logo.addEventListener('click', goHome = () => {
+        document.querySelector("#display-list-form").style = "visibility: visible"
+        document.querySelector("#display-reminder-form").style = "visibility: visible"
+        document.querySelector(".reminder-form-container").style.display = "none"
+        document.querySelector(".list-form-container").style.display = "none"
+        document.querySelector("#list-container").style = "display: "
+    })
 }
 

@@ -35,7 +35,7 @@ class ListAdapter {
                     // calling the instance method
                     document.querySelector("#list-container").innerHTML += newList.renderList()
                     document.querySelector('#list-form').reset()
-                    location.reload()
+                    document.querySelector('#reminder-form').querySelector('select').innerHTML += `<option value="${newList.id}">${newList.name}</option>`
                     listForm.handleHideListForm()
                 } else {
                     alert(list.errors)
@@ -57,8 +57,13 @@ class ListAdapter {
                     document.querySelector('#list-form').reset()
                     editMode.children[0].children[0].children[0].children[1].children[0].innerText = list.name
                     editMode.children[0].style.border = `2px solid ${list.color}`
+                    
+                    let option = document.querySelector('#reminder-form').querySelector('select').querySelector(`#num-${editMode.dataset.id}`)
+                    option.value = list.id.toString()
+                    option.id = `num-${list.id}`
+                    option.innerText = list.name
+
                     editMode = false
-                    location.reload()
                     listForm.handleHideListForm()
                 } else {
                     alert(list.errors)
@@ -75,6 +80,7 @@ class ListAdapter {
             .then(data => {
                 if (data.message === "Successfully deleted") {
                     let option = document.querySelector('#reminder-form').querySelector('select').querySelector(`#num-${div.dataset.id}`)
+                    debugger
                     option.parentNode.removeChild(option)
                     div.remove()
                 } else {
